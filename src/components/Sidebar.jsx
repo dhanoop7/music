@@ -29,7 +29,7 @@ const Container = styled.div`
       display: flex;
       gap: 1rem;
       cursor: pointer;
-      trasition: 0.3s ease-in-out;
+      transition: 0.3s ease-in-out;
       &:hover{
         color: white;
       }
@@ -37,10 +37,10 @@ const Container = styled.div`
   }
   
   .logo_head {
-    color:  #1db954;
+    color:  red;
   }
   .logo_tail {
-    color: #1db954;
+    color: #fff;
   }
 `;
 

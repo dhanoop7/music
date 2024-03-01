@@ -3,6 +3,7 @@ import Login from './components/Login'
 import { useStateProvider } from './utils/StateProvider';
 import { reducerCases } from './utils/Constants';
 import Spotify from './components/Spotify';
+import './App.css'
 
 export default function App() {
 

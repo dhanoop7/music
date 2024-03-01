@@ -1,9 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
-import { FaSearch } from 'react-icons/fa'
-import { CgProfile } from 'react-icons/cg'
-import { useStateProvider } from '../utils/StateProvider';
+// Navbar.jsx
 
+import React from 'react';
+import styled from 'styled-components';
+import { FaSearch } from 'react-icons/fa';
+import { CgProfile } from 'react-icons/cg';
+import { useStateProvider } from '../utils/StateProvider';
 
 const Container = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   transition: 0.3s ease-in-out;
-  background-color: none;
+  background-color: ${({ navBackground }) => (navBackground ? 'rgba(0, 0, 0, 0.7)' : 'none')};
 
   .search_bar {
     display: flex;
@@ -34,57 +35,65 @@ const Container = styled.div`
       outline: none;
       height: 2rem;
       width: 100%;
-      &:focus{
+      &:focus {
         outline: none;
       }
     }
   }
 
   .avatar {
-      background-color: black;
-      padding: 0.3rem 0.4rem;
-      padding-right: 1rem;
-      border-radius: 2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-  }
-
-  a{
+    background-color: black;
+    padding: 0.3rem 0.4rem;
+    padding-right: 1rem;
+    border-radius: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem
+    text-decoration: none;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
     text-decoration: none;
     color: white;
     font-weight: bold;
 
     svg {
       font-size: 1.3rem;
-      backgound-color: #282828;
+      background-color: #282828;
       padding: 0.2rem;
       border-radius: 1rem;
       color: #c7c5c5;
     }
-
   }
 `;
 
-export default function Navbar() {
-  const [{userInfo}] = useStateProvider();
+export default function Navbar({ navBackground, onSearchChange }) {
+  const [{ userInfo }] = useStateProvider();
+
+  const handleSearchChange = (event) => {
+    onSearchChange(event.target.value);
+  };
+
   return (
-    <Container>
+    <Container navBackground={navBackground}>
       <div className='search_bar'>
         <FaSearch />
-        <input type='text' placeholder='Artists, songs, podcasts' />
+        <input
+          type='text'
+          placeholder='Artists, songs, podcasts'
+          onChange={handleSearchChange}
+        />
       </div>
-      <div className="avatar">
+      <div className='avatar'>
         <a href='#'>
           <CgProfile />
           <span>{userInfo?.userName}</span>
         </a>
       </div>
     </Container>
-  )
+  );
 }
